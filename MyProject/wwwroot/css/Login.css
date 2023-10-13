@@ -1,0 +1,93 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(60deg, #00e1ff, #003cff);
+}
+
+.Login {
+    width: 400px;
+    height: 600px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+
+h1 {
+    font-size: 60px;
+    color: #003cff;
+    margin: 50px auto 20px;
+}
+
+.Text {
+    position: relative;
+    display: grid;
+    grid-template-columns: 30px auto;
+    padding: 10px 0;
+    margin: 30px 50px 0;
+    border-bottom: 1px solid #555;
+}
+
+    .Text input {
+        background: transparent;
+        border: 0;
+        width: 200px;
+        outline: none;
+    }
+
+    .Text:nth-child(2) {
+        grid-template-columns: 30px auto 30px;
+    }
+
+        .Text:nth-child(2) input[type="password"] ~ .fa-eye {
+            display: none;
+        }
+
+        .Text:nth-child(2) input[type="text"] ~ .fa-eye-slash {
+            display: none;
+        }
+
+.Remenber {
+    display: flex;
+    flex-direction: row;
+    left: -1;
+    margin: 5px 50px;
+}
+
+    .Remenber p {
+        margin-left: 5px;
+    }
+
+button {
+    width: 120px;
+    height: 40px;
+    margin: 20px 0px;
+    color: blue;
+    border-radius: 10px;
+    background-color: white;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.Controller {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

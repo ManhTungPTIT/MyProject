@@ -1,0 +1,14 @@
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\bin\Debug\net7.0\MyProject.Models.deps.json
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\bin\Debug\net7.0\MyProject.Models.runtimeconfig.json
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\bin\Debug\net7.0\MyProject.Models.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\bin\Debug\net7.0\MyProject.Models.pdb
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.csproj.AssemblyReference.cache
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.AssemblyInfoInputs.cache
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.AssemblyInfo.cs
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.csproj.CoreCompileInputs.cache
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\refint\MyProject.Models.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.pdb
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\MyProject.Models.genruntimeconfig.cache
+D:\C#\C#_basic\ProjectOfNam\MyProject.Models\obj\Debug\net7.0\ref\MyProject.Models.dll

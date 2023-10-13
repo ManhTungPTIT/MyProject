@@ -1,0 +1,59 @@
+﻿
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http.Extensions
+@inject SignInManager<IdentityUser> SignInManager
+
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/css/Login.css" />
+</head>
+<body>
+    <form asp-action="Login" asp-controller="Authentication">
+        <div class="Login">
+            <h1>Sign in</h1>
+            <div class="Login_text">
+                <div class="Text">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" placeholder="UserName" id="email" name="userName"/>
+                </div>
+                <div class="Text">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" name="password"/>
+                    <i class="fa-regular fa-eye" onclick="changePass()"></i>
+                    <i class="fa-regular fa-eye-slash" onclick="changePass()"></i>
+                </div>
+            </div>
+            <div class="Remenber">
+                <input type="checkbox" id="check" />
+                <p>Remenber</p>
+            </div>
+            @if(ViewData.Keys.Contains("message")){
+                            <p style="color: red">
+                            @ViewData["message"]
+                        </p>
+                        }
+            <div class="Controller">
+                <button id="login" >Login</button>
+                <p>OR</p>
+                <button>
+                    <a asp-action="Register" asp-controller="Authentication">Resgister</a>
+                </button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function changePass() {
+            let password = document.getElementById("password");
+            password.type = password.type == "text" ? "password" : "text";
+        }
+    </script>
+</body>
+</html>

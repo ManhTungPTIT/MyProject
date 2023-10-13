@@ -1,0 +1,72 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="/CSS/Register.css" />
+</head>
+<body>
+    <script src="/js/register.js"></script>
+    <form asp-action="Register" >
+        <div class="Login">
+            <h1>Resgister</h1>
+            <div class="Login_text">
+                <div class="Text">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" placeholder="UserName" id="email" name="userName" />
+                </div>
+                <div class="Text">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" name="password" />
+                    <i class="fa-regular fa-eye" onclick="changePass()"></i>
+                    <i class="fa-regular fa-eye-slash" onclick="changePass()"></i>
+                </div>
+                <div class="Text">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password"
+                           id="confirm"
+                           placeholder="Confirm password" />
+                    <i class="fa-regular fa-eye" onclick="change()"></i>
+                    <i class="fa-regular fa-eye-slash" onclick="change()"></i>
+                </div>
+                <span class="mess">Hãy nhập lại mật khẩu</span>
+                <div class="Info">
+                  
+                    <input type="text" placeholder="Phone" id="phone" name="phone"/>
+                    <input type="date" placeholder="Day" id="address" name="day" />
+                </div>
+            </div>
+            @if(ViewData.Keys.Contains("message")){
+                <p style="color: red">
+                @ViewData["message"]
+            </p>
+            }
+"
+            <div class="Controller">
+                <button id="Register" type="submit">Resgister</button>
+                <button>
+                    <a asp-action="Login" asp-controller="Authentication"> Login </a>
+                </button>
+            </div>
+        </div>
+    </form>
+    <script>
+        function changePass() {
+            let password = document.getElementById("password");
+            password.type = password.type == "text" ? "password" : "text";
+        }
+        function change() {
+            let password = document.getElementById("confirm");
+            password.type = password.type == "text" ? "password" : "text";
+        }
+    </script>
+</body>
+</html>

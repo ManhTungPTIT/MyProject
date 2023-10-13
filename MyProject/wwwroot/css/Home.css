@@ -1,0 +1,106 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.Tabs {
+    width: 20rem;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    background-color: rgb(228, 241, 241);
+    flex-basis: 300px;
+}
+
+.Title {
+    background-color: rgb(24, 199, 156);
+    color: white;
+    width: 100vw;
+    height: 80px;
+    font-size: 20px;
+    padding: 20px 20px;
+}
+
+    .Title a {
+        border: none;
+        width: 5rem;
+        height: 1rem;
+        margin-left: auto;
+        color: white;
+        text-decoration: none;
+    }
+
+.tab-item {
+    min-width: 100px;
+    padding: 1.8rem 4.5rem;
+    font-size: 20px;
+    color: gray;
+    background-color: rgb(228, 241, 241);
+    border-bottom: 5px solid transparent;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+    .tab-item a {
+        color: gray;
+        text-decoration: none;
+    }
+
+    .tab-icon {
+        font-size: 24px;
+        width: 32px;
+        position: relative;
+        top: 2px;
+    }
+
+.tab-item:hover {
+    opacity: 1;
+    color: rgb(24, 170, 133);
+    background-color: rgba(111, 123, 123, 0.215);
+}
+.tab-item a:hover {
+    opacity: 1;
+    color: rgb(24, 170, 133);
+}
+
+    .tab-item.active {
+        opacity: 1;
+    }
+
+.Contents {
+    margin: 80px 0 0 20px;
+    flex-grow: 5;
+}
+
+#add {
+    width: 100px;
+    height: 30px;
+    background-color: rgb(24, 199, 156);
+    color: white;
+    cursor: pointer;
+    border: none;
+    margin: 10px 0;
+}
+
+.fa-solid {
+    font-size: 1.3rem;
+}
+
+.Edit_info {
+    width: 15rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 5px;
+    height: 3rem;
+    font-size: 15px;
+}

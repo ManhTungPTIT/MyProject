@@ -1,0 +1,49 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http.Extensions
+@using System.Security.Claims
+@inject SignInManager<IdentityUser> SignInManager
+@{
+    var name = ViewBag.Name;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/css/Home.css"/>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="Tabs">
+    <div class="Title d-flex flex-row">
+        <p>@name</p>
+        <a asp-action="Logout" asp-controller="Authentication">Log out</a>
+    </div>
+    <div class="tab-item active">
+        <i class="tab-icon fa-solid fa-user"></i>
+        <a asp-action="Index" asp-controller="Customer">Customer</a>
+    </div>
+    <div class="tab-item active">
+        <i class="fa-solid fa-sack-dollar"></i>
+        Revenue
+    </div>
+    <div class="tab-item active">
+        <i class="fa-solid fa-user-tie"></i>
+        <a class="ms-2" asp-action="Index" asp-controller="Employee">Employees</a>
+    </div>
+    <div class="tab-item active">
+        <i class="fa-solid fa-book"></i>
+        <a class="ms-2" asp-action="Index" asp-controller="Evalute">Evalute</a>
+    </div>
+</div>
+<div class="Contents">
+    @RenderBody()
+</div>
+</body>
+</html>
