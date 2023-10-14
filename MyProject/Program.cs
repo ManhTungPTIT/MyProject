@@ -17,24 +17,25 @@ namespace MyProject
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddControllers();
-            
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDBContext>()
-                .AddDefaultTokenProviders()
-                .AddRoles<IdentityRole>();
-
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDBContext>(option =>
             {
                 option.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));
             });
             
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDBContext>()
+                .AddDefaultTokenProviders()
+                .AddRoles<IdentityRole>();
+            
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+            
+            
             // Autofac integrationa
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(config => config.RegisterModule(new CoreModule()));
-            
+
+            builder.Services.AddRazorPages();
             //AddAuthentication
             builder.Services.AddAuthentication(options =>
             {
@@ -63,11 +64,45 @@ namespace MyProject
                 options.ExpireTimeSpan = TimeSpan.FromHours(2);
             });
             
+            builder.Services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+                
+                // Default SignIn settings.
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+
+                // Lockout settings.
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings.
+                options.User.AllowedUserNameCharacters =
+                    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+
+                options.LoginPath = "/Authentication/Login";
+                options.AccessDeniedPath = "/Authentication/Login";
+                options.SlidingExpiration = true;
+            });
 
             builder.Services.AddAuthorization();
             builder.Services.AddHttpContextAccessor();
-
-            builder.Services.AddSwaggerGen();
+            
             //Cookie setting
             
             var app = builder.Build();
@@ -75,8 +110,7 @@ namespace MyProject
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                
             }
 
             app.UseHttpsRedirection();

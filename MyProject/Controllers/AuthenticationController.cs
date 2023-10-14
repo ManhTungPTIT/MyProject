@@ -36,11 +36,6 @@ namespace MyProject.Controllers
                     return RedirectToAction("Register", routeValues: new {message});
                 }
                 
-                var user = new IdentityUser()
-                {
-                    UserName = userName,
-                    Email = userName,
-                };
                 
                 var check = User.Identity.IsAuthenticated;
                 if (check)
