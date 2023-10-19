@@ -4,6 +4,7 @@ using MyProject.AppService.IService;
 
 namespace MyProject.Controllers
 {
+    [Authorize]
     
     public class EvaluteController : Controller
     {

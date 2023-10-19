@@ -9,10 +9,13 @@ namespace MyProject.Models.Dtos
 {
     public class KPIsDto : BaseDto
     {
-        public string Revenue { get; set; }
-        
+        public decimal Revenue { get; set; }
         public int DayOfMonth { get; set; }
+        public int EmployeeId { get; set; }
+        public decimal Kpis { get; set; }
+        public string EMployeeName { get; set; }
 
+        public ICollection<Employees> Employees { get; set; }
         public virtual ICollection<KPIs> Deleted { get; set; }
     }
 }

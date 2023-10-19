@@ -16,7 +16,8 @@ namespace MyProject.Models.Mapping
             CreateMap<Admin, AdminDto>();
             CreateMap<Customers, CustomerDto>();
             CreateMap<Employees, EmployeeDto>();
-            CreateMap<KPIs,  KPIsDto>();
+            CreateMap<KPIs,  KPIsDto>()
+                .ForMember(dest => dest.Employees, opt => opt.MapFrom(src => src));
             CreateMap<AdminCustomers, AdminCustomersDto>();
             CreateMap<AdminEmployees, AdminEmpoloyeeDto>();
         }

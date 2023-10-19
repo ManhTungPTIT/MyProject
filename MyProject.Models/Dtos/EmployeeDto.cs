@@ -11,7 +11,10 @@ namespace MyProject.Models.Dtos
     {
         public string UserName { get; set; }
         public string Competence { get; set; }
-
+        public DateTime? CreateOn { get; set; }
+        public DateTime? UpdateOn { get; set; }
+        public DateTime? DeleteOn { get; set; }
+        
         public virtual ICollection<Employees> Employees { get; set; }
     }
 }

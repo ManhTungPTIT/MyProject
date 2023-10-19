@@ -1,45 +1,75 @@
+@model List<MyProject.Models.Dtos.EmployeeDto>;
 @{
     Layout = "_Layout";
 }
 <link rel="stylesheet" href="/css/AdminEmploy.css"/>
-<table class="table table-bordered">
+<table class="table table-bordered mt-3">
     <thead>
     <tr>
-        <th>UserNaem</th>
+        <th>ID</th>
+        <th>UserName</th>
         <th>Competence</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td>John</td>
-        <td>Competence</td>
-        <td>
-            <button><i class="fa-solid fa-pen"></i></button>
-            <button>
-                <i class="fa-regular fa-trash-can" style="color: #e91616"></i>
-            </button>
-        </td>
+        @if (Model != null)
+        {
+            foreach (var user in Model)
+            {
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>@user.Competence</td>
+                <td>
+                    <div class="d-flex flex-row justify-content-around">
+
+                        <button type="submit" class="btOperation" data-bs-toggle="modal" data-bs-target="#myModal/@user.Id">
+                            <i class="fa-solid fa-pen fs-4" style="color: #db923d"></i>
+                        </button>
+
+                        <form asp-action="DeleteEmployee" asp-controller="Employee" asp-route-employeeId="">
+                            <button class="btOperation">
+                                <i class="fa-regular fa-trash-can fs-4" style="color: #db2424"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <form asp-action="EditEmployee" asp-controller="Employee">
+                                <!-- The Modal -->
+                                <div class="modal fade" id="myModal/@user.Id">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                    
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Edit Information Employee</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                    
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <input class="form-control" value="id" style="display: none"/>
+                                                <input class="form-control shadow-none mt-2" value="Name"/>
+                                                <input class="form-control shadow-none mt-2" value="Compre"/>
+                                            </div>
+                    
+                                            <!-- Modal footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                    
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                </td>
+            }
+        }
+        
+        
+
+        
     </tr>
-    <tr>
-        <td>Mary</td>
-        <td>Competence</td>
-        <td>
-            <button><i class="fa-solid fa-pen"></i></button>
-            <button>
-                <i class="fa-regular fa-trash-can" style="color: #e91616"></i>
-            </button>
-        </td>
-    </tr>
-    <tr>
-        <td>July</td>
-        <td>Competence</td>
-        <td>
-            <button><i class="fa-solid fa-pen"></i></button>
-            <button>
-                <i class="fa-regular fa-trash-can" style="color: #e91616"></i>
-            </button>
-        </td>
-    </tr>
+
     </tbody>
 </table>

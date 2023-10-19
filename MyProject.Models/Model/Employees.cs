@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace MyProject.Models.Model
 {
     public class Employees 
     {
+        
         public string UserName { get; set; }
         public string Password { get; set; }
         public string? Competence { get; set; }

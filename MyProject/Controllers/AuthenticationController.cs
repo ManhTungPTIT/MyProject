@@ -1,8 +1,7 @@
-﻿
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MyProject.AppService.IService;
 using MyProject.Models.Model;
 
@@ -10,17 +9,16 @@ namespace MyProject.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IAuthenService service;
-        public AuthenticationController(IAuthenService service, SignInManager<IdentityUser> signInManager)
+        private readonly IAuthenService _service;
+        public AuthenticationController(IAuthenService service)
         {
-            this.service = service;
-            _signInManager = signInManager;
+            this._service = service;
+            
         }
         
         public async Task<IActionResult> Login(string? userName, string? password)
         {
-            string message = "";
+            
             if(userName != null && password != null)
             {
                 Admin admin = new Admin()
@@ -29,19 +27,25 @@ namespace MyProject.Controllers
                     Password = password,
                 };
 
-                var result = await service.Login(admin);
+                var result = await _service.Login(admin);
+                if (!result.IsNullOrEmpty())
+                {
+                    if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        var role = User.IsInRole("ADMIN");
+                        return Redirect("/Customer/Index");
+                    }
+                }
                 if (string.IsNullOrEmpty(result))
                 {
-                    message = "Tài khoản hoặc mật khẩu không đúng";
+                    var message = "Tài khoản hoặc mật khẩu không đúng";
                     return RedirectToAction("Register", routeValues: new {message});
                 }
-                
-                
-                var check = User.Identity.IsAuthenticated;
-                if (check)
+                else
                 {
                     return Redirect("/Customer/Index");
                 }
+                
             }
             return View();
         }
@@ -56,7 +60,7 @@ namespace MyProject.Controllers
                     CreateOn = day,
                 };
                 
-                bool check =  await service.Register(admin);
+                bool check =  await _service.Register(admin);
                 if (!check)
                 {
                     string message = "Tài khoản đã tồn tại";
@@ -65,7 +69,7 @@ namespace MyProject.Controllers
 
                
                 
-                return Redirect("~/Authentication/Login");
+                return Redirect("~/Customer/Index");
             }
             return View();
         }

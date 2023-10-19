@@ -8,9 +8,10 @@ namespace MyProject.Models.Model
 {
     public class KPIs
     {
-        public string Revenue { get; set; }
+        public decimal Revenue { get; set; }
         public int DayOfMonth { get; set; }
         public int Id { get; set; }
+        public decimal Kpis { get; set; }
         public DateTime? CreateOn { get; set; }
         public DateTime? UpdateOn { get; set; }
 

@@ -19,7 +19,8 @@ namespace MyProject.Infrastructure.Repository
 
         public async Task<List<KPIsDto>> GetAllAsync()
         {
-            var list = await Context.Set<KPIs>().Select(p => new KPIsDto
+            var list = await Context.Set<KPIs>()
+                .Select(p => new KPIsDto
             {
                 Revenue = p.Revenue,
                 DayOfMonth = p.DayOfMonth,
@@ -27,6 +28,22 @@ namespace MyProject.Infrastructure.Repository
 
             }).ToListAsync();
             return list;
+        }
+
+        public async Task<decimal> GetRevenueByEmployeeAsync(int id)
+        {
+            var total = await Context.Set<KPIsDto>()
+                .Where(e => e.EmployeeId == id)
+                .SumAsync(e => e.Revenue);
+            return total;
+        }
+
+        public async Task<int> GetDayByEmployeeAsync(int id)
+        {
+            var total = await Context.Set<KPIsDto>()
+                .Where(e => e.EmployeeId == id)
+                .CountAsync();
+            return total;
         }
     }
 }

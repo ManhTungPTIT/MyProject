@@ -3,11 +3,7 @@ using MyProject.DomainService;
 using MyProject.Infrastructure.ApplicationContext;
 using MyProject.Models.Dtos;
 using MyProject.Models.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MyProject.Infrastructure.Repository
 {
@@ -47,9 +43,10 @@ namespace MyProject.Infrastructure.Repository
         public async Task<bool> EditCustomerAsync(Customers customer)
         {
             var customerCurrent = await Context.Set<Customers>()
-                .Where(u => u.UserName == customer.UserName)
+                .Where(u => u.Id == customer.Id)
                 .FirstOrDefaultAsync();
 
+            customerCurrent.UserName = customer.UserName;
             customerCurrent.Phone = customer.Phone;
             customerCurrent.Address = customer.Address;
             customerCurrent.UpdateOn = DateTime.Now;
@@ -63,6 +60,7 @@ namespace MyProject.Infrastructure.Repository
                 .Where(u => u.DeleteOn == null)
                 .Select(u => new CustomerDto
             {
+                Id = u.Id,
                 UserName = u.UserName,
                 CreateOn = (DateTime) u.CreateOn,
                 Phone = u.Phone,

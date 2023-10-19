@@ -1,5 +1,4 @@
-﻿
-@using MyProject.Models.Dtos
+﻿@using MyProject.Models.Dtos
 @model MyProject.Models.Model.Customers
 @{
     Layout = "_Layout";
@@ -10,44 +9,48 @@
     <button id="add" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Add">
         Add
     </button>
-    
-    <!-- The Modal -->
-    <div class="modal" id="Add">
-      <div class="modal-dialog">
-        <div class="modal-content">
-    
-          <!-- Modal Header -->
-          <div class="modal-header">
-            <h4 class="modal-title">Infomation Customer</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-    
-          <!-- Modal body -->
-          <div class="modal-body d-flex flex-column align-items-center">
-            <input
-                      class="input"
-                      type="text"
-                      placeholder="User Name"
-                      asp-for="UserName"
-                    />
-                    <input
-                      class="input"
-                      type="text"
-                      placeholder="Address"
-                      asp-for="Address"
-                    />
-                    <input class="input" type="date" asp-for="CreateOn" />
-          </div>
-    
-          <!-- Modal footer -->
-          <div class="modal-footer">
-              <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" 
-                      asp-action="AddCustomer" asp-controller="Customer">Add</button>
-          </div>
-    
+
+    <form asp-action="AddCustomer" asp-controller="Customer">
+        <!-- The Modal -->
+        <div class="modal" id="Add">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Infomation Customer</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body d-flex flex-column align-items-center">
+                        <input
+                            class="input form-control shadow-none mt-2"
+                            type="text"
+                            placeholder="User Name"
+                            asp-for="UserName"/>
+                        <input
+                            class="input form-control shadow-none mt-2"
+                            type="text"
+                            placeholder="Phone"
+                            asp-for="Phone"/>
+                        <input
+                            class="input form-control shadow-none mt-2"
+                            type="text"
+                            placeholder="Address"
+                            asp-for="Address"/>
+                        <input class="input form-control shadow-none mt-2" type="date" asp-for="CreateOn"/>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Add</button>
+                    </div>
+
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </form>
 </div>
 <table class="table table-hover">
     <thead>
@@ -60,52 +63,61 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var cus in list)
+    @if (list != null)
     {
-        <tr>
-            <td>@cus.Id</td>
-            <td>@cus.UserName</td>
-            <td>@cus.Phone</td>
-            <td>@cus.Address</td>
-            <td>
-                <form asp-action="Delete" asp-controller="Customer" asp-route-customerID="@cus.Id">
-                    <i type="submit" class="fa-solid fa-trash" style="color: #db2424; cursor: pointer"></i>
-                </form>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal/@cus.Id" style="border: none; background-color: unset">
-                    <i class="fa-solid fa-file-pen ms-4" style="color: #db923d"></i>
-                </button>
-            </td>
-        </tr>
+        @foreach (var cus in list)
+        {
+            <tr>
+                <td>@cus.Id</td>
+                <td>@cus.UserName</td>
+                <td>@cus.Phone</td>
+                <td>@cus.Address</td>
+                <td>
+                    <div class="d-flex flex-row align-items-center">
+                        <form style="width: 1rem" asp-action="Delete" asp-controller="Customer" asp-route-customerID="@cus.Id">
+                            <button type="submit" class="btDelete">
+                                <i type="submit" class="fa-solid fa-trash" style="color: #db2424; cursor: pointer"></i>
+                            </button>
+                        </form>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal/@cus.Id" style="border: none; background-color: unset">
+                            <i class="fa-solid fa-file-pen ms-4" style="color: #db923d"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
 
-        <!--  Edit -->
-        <form asp-action="Edit" method="post">
-            <div class="modal" id="#myModal/@cus.Id">
-                <div class="modal-dialog">
-                    <div class="modal-content">
+            <!--  Edit -->
+            <form asp-action="Edit" asp-controller="Customer" >
+                <div class="modal" id="myModal/@cus.Id">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Edit</h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Edit</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <input class="Edit_info" type="text" value="@cus.UserName" asp-for="Id" style="display: none"/>
+                                <input class="Edit_info" type="text" value="@cus.UserName" asp-for="UserName"/>
+                                <input class="Edit_info" type="text" value="@cus.Phone" asp-for="Phone"/>
+                                <input class="Edit_info" type="text" value="@cus.Address" asp-for="Address"/>
+                                <input class="Edit_info" type="date" value="@cus.CreateOn" asp-for="CreateOn"/>
+                            </div>
+
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Save</button>
+                            </div>
+
                         </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <input class="Edit_info" type="text" value="@cus.UserName" asp-for="UserName"/>
-                            <input class="Edit_info" type="text" value="@cus.Phone" asp-for="Phone"/>
-                            <input class="Edit_info" type="text" value="@cus.Address" asp-for="Address"/>
-                            <input class="Edit_info" type="date" value="@cus.CreateOn" asp-for="CreateOn"/>
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Save</button>
-                        </div>
-
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        }
     }
+
     </tbody>
 </table>

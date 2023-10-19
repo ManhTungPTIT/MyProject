@@ -104,3 +104,10 @@ body {
     height: 3rem;
     font-size: 15px;
 }
+.fa-trash:focus{
+    color: white;
+}
+.btDelete{
+    border: none;
+    background-color: transparent;
+}

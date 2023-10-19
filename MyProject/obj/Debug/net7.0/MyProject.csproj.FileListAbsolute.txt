@@ -268,7 +268,6 @@ D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.Extensions.File
 D:\C#\C#_basic\ProjectOfNam\MyProject\obj\Debug\net7.0\MyProject.MvcApplicationPartsAssemblyInfo.cs
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Autofac.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Autofac.Extensions.DependencyInjection.dll
-D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\MyProject.AppService.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\MyProject.DomainService.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\MyProject.AppService.pdb
@@ -277,3 +276,8 @@ D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.OpenApi.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.AspNetCore.Authorization.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.AspNetCore.Metadata.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.AspNetCore.Components.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject\bin\Debug\net7.0\Microsoft.AspNetCore.Components.Authorization.dll

@@ -11,7 +11,8 @@ namespace MyProject.DomainService
     public interface IEvaluteRepository
     {
         Task<List<KPIsDto>> GetAllAsync();
+        Task<decimal> GetRevenueByEmployeeAsync(int id);
+        Task<int> GetDayByEmployeeAsync(int id);
 
-        
     }
 }

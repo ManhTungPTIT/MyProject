@@ -3,7 +3,6 @@
 @using System.Security.Claims
 @inject SignInManager<IdentityUser> SignInManager
 @{
-    var name = ViewBag.Name;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +21,7 @@
 <body>
 <div class="Tabs">
     <div class="Title d-flex flex-row">
-        <p>@name</p>
+        <p>@User.Identity!.Name</p>
         <a asp-action="Logout" asp-controller="Authentication">Log out</a>
     </div>
     <div class="tab-item active">

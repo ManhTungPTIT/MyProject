@@ -30,30 +30,38 @@ namespace MyProject.Infrastructure.Repository
 
         public async Task<string> LoginAsync(Admin admin)
         {
-            var result = await _signInManager.PasswordSignInAsync
-                (admin.UserName, admin.Password, false, false);
-           
-            if (!result.Succeeded)
+            var user = new IdentityUser
             {
-                return string.Empty;
-            }
-            
-            var authClaims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Email, admin.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                UserName = admin.UserName,
+                Email = admin.UserName,
             };
 
-            var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"] ?? string.Empty));
-
-            var token = new JwtSecurityToken(
-                    issuer: _configuration["JWT:ValidIssuer"],
-                    audience: _configuration["JWT:ValidAudience"],
-                    expires: DateTime.Now.AddHours(2),
-                    claims: authClaims,
-                    signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha512Signature)
-                );
-            return new JwtSecurityTokenHandler().WriteToken(token);
+             await _signInManager.SignInAsync(user, isPersistent: true);
+                return "Succeeded";
+                
+            // var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"] ?? string.Empty));
+            // if (admin.UserName.Contains("@admin"))
+            // {
+            //     var authClaimsAdmin = new List<Claim>
+            //     {
+            //         new Claim(ClaimTypes.Email, admin.UserName),
+            //         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            //         new Claim(ClaimTypes.AuthorizationDecision, "Admin")
+            //     };
+            //     
+            //     var token = new JwtSecurityToken(
+            //         issuer: _configuration["JWT:ValidIssuer"],
+            //         audience: _configuration["JWT:ValidAudience"],
+            //         expires: DateTime.Now.AddHours(2),
+            //         claims: authClaimsAdmin,
+            //         signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha512Signature)
+            //     );
+            //     
+            //     return new JwtSecurityTokenHandler().WriteToken(token);
+            // }
+            //
+            //
+            // return "";
         }
 
        
