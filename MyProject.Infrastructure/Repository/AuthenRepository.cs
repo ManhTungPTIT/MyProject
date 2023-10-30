@@ -30,38 +30,11 @@ namespace MyProject.Infrastructure.Repository
 
         public async Task<string> LoginAsync(Admin admin)
         {
-            var user = new IdentityUser
-            {
-                UserName = admin.UserName,
-                Email = admin.UserName,
-            };
+            var user = await _userManager.FindByNameAsync(admin.UserName);
 
              await _signInManager.SignInAsync(user, isPersistent: true);
+             var role = await _userManager.GetRolesAsync(user);
                 return "Succeeded";
-                
-            // var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"] ?? string.Empty));
-            // if (admin.UserName.Contains("@admin"))
-            // {
-            //     var authClaimsAdmin = new List<Claim>
-            //     {
-            //         new Claim(ClaimTypes.Email, admin.UserName),
-            //         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            //         new Claim(ClaimTypes.AuthorizationDecision, "Admin")
-            //     };
-            //     
-            //     var token = new JwtSecurityToken(
-            //         issuer: _configuration["JWT:ValidIssuer"],
-            //         audience: _configuration["JWT:ValidAudience"],
-            //         expires: DateTime.Now.AddHours(2),
-            //         claims: authClaimsAdmin,
-            //         signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha512Signature)
-            //     );
-            //     
-            //     return new JwtSecurityTokenHandler().WriteToken(token);
-            // }
-            //
-            //
-            // return "";
         }
 
        
@@ -96,6 +69,7 @@ namespace MyProject.Infrastructure.Repository
                 }
 
                 var result = await _userManager.AddToRoleAsync(newAdmin, "ADMIN");
+                await _signInManager.SignInAsync(newAdmin, isPersistent: true);
             }
             else
             {
@@ -125,6 +99,7 @@ namespace MyProject.Infrastructure.Repository
                 }
 
                 var result = await _userManager.AddToRoleAsync(employeeIdentity, "USER");
+                await _signInManager.SignInAsync(employeeIdentity, isPersistent: true);
             }
           
             await Context.SaveChangesAsync();

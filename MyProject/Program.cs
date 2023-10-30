@@ -19,13 +19,19 @@ namespace MyProject
                 option.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection"));
             });
 
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+            builder.Services.AddDefaultIdentity<IdentityUser>(
                     options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDBContext>()
                 .AddDefaultTokenProviders();
 
-            builder.Services.AddRazorPages();
+            builder.Services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizePage("/Contact");
+                options.Conventions.AuthorizeFolder("/Private");
+                options.Conventions.AllowAnonymousToPage("/Private/PublicPage");
+                options.Conventions.AllowAnonymousToFolder("/Private/PublicPages");
+            });
             builder.Services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.

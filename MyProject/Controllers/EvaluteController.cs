@@ -5,7 +5,7 @@ using MyProject.AppService.IService;
 namespace MyProject.Controllers
 {
     [Authorize]
-    
+    [Authorize(Roles = "ADMIN")]
     public class EvaluteController : Controller
     {
         private readonly IEvaluteService _service;

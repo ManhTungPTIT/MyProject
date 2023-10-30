@@ -30,6 +30,7 @@ namespace MyProject.Controllers
                 var result = await _service.Login(admin);
                 if (!result.IsNullOrEmpty())
                 {
+                    
                     if (User.Identity != null && User.Identity.IsAuthenticated)
                     {
                         var role = User.IsInRole("ADMIN");

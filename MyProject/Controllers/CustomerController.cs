@@ -7,7 +7,7 @@ using MyProject.Models.Model;
 namespace MyProject.Controllers
 {
     
-    [AllowAnonymous]
+    [Authorize(Roles = "ADMIN")]
     public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;

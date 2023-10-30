@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace MyProject.Controllers
 {
     [Authorize]
-    
+    [Authorize(Roles = "USER")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

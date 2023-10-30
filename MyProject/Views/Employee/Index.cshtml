@@ -13,11 +13,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
         @if (Model != null)
         {
             foreach (var user in Model)
             {
+                <tr>
                 <td>@user.Id</td>
                 <td>@user.UserName</td>
                 <td>@user.Competence</td>
@@ -35,41 +35,37 @@
                         </form>
                     </div>
                     <form asp-action="EditEmployee" asp-controller="Employee">
-                                <!-- The Modal -->
-                                <div class="modal fade" id="myModal/@user.Id">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
+                        <!-- The Modal -->
+                        <div class="modal fade" id="myModal/@user.Id">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
                     
-                                            <!-- Modal Header -->
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Edit Information Employee</h4>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                            </div>
-                    
-                                            <!-- Modal body -->
-                                            <div class="modal-body">
-                                                <input class="form-control" value="id" style="display: none"/>
-                                                <input class="form-control shadow-none mt-2" value="Name"/>
-                                                <input class="form-control shadow-none mt-2" value="Compre"/>
-                                            </div>
-                    
-                                            <!-- Modal footer -->
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                            </div>
-                    
-                                        </div>
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Information Employee</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
+                    
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <input class="form-control" value="id" style="display: none"/>
+                                        <input class="form-control shadow-none mt-2" value="Name"/>
+                                        <input class="form-control shadow-none mt-2" value="Compre"/>
+                                    </div>
+                    
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                    
                                 </div>
-                            </form>
+                            </div>
+                        </div>
+                    </form>
                 </td>
+                </tr>
             }
         }
-        
-        
-
-        
-    </tr>
-
+    
     </tbody>
 </table>

@@ -32,7 +32,7 @@ namespace MyProject.Infrastructure.Repository
 
         public async Task<decimal> GetRevenueByEmployeeAsync(int id)
         {
-            var total = await Context.Set<KPIsDto>()
+            var total = await Context.Set<KPIs>()
                 .Where(e => e.EmployeeId == id)
                 .SumAsync(e => e.Revenue);
             return total;
@@ -40,7 +40,7 @@ namespace MyProject.Infrastructure.Repository
 
         public async Task<int> GetDayByEmployeeAsync(int id)
         {
-            var total = await Context.Set<KPIsDto>()
+            var total = await Context.Set<KPIs>()
                 .Where(e => e.EmployeeId == id)
                 .CountAsync();
             return total;

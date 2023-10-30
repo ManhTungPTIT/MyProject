@@ -16,7 +16,7 @@ public class EmployeeController : Controller
         _service = service;
     }
     
-    [Authorize]
+    [Authorize(Roles = "ADMIN")]
     public async Task<IActionResult> Index()
     {
         var list = await _service.GetAllEmployee();
