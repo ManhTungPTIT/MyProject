@@ -20,7 +20,9 @@ namespace MyProject.Infrastructure.ApplicationContext
             modelBuilder.ApplyConfiguration(new AdminEmployeeConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
-            modelBuilder.ApplyConfiguration(new KPIsConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new BillConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductBillConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

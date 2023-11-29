@@ -12,8 +12,8 @@ using MyProject.Infrastructure.ApplicationContext;
 namespace MyProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20230928033400_MyProject")]
-    partial class MyProject
+    [Migration("20231107135701_DbMyProject")]
+    partial class DbMyProject
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,6 +316,43 @@ namespace MyProject.Infrastructure.Migrations
                     b.ToTable("AdminEmployee", (string)null);
                 });
 
+            modelBuilder.Entity("MyProject.Models.Model.Bill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Bill", (string)null);
+                });
+
             modelBuilder.Entity("MyProject.Models.Model.Customers", b =>
                 {
                     b.Property<int>("Id")
@@ -358,12 +395,24 @@ namespace MyProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Competence")
+                    b.Property<DateTime?>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DayOfMonth")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeleteOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Kpis")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("CreateOn")
-                        .HasColumnType("datetime2");
+                    b.Property<decimal>("Revenue")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("UpdateOn")
                         .HasColumnType("datetime2");
@@ -377,7 +426,7 @@ namespace MyProject.Infrastructure.Migrations
                     b.ToTable("Employees", (string)null);
                 });
 
-            modelBuilder.Entity("MyProject.Models.Model.KPIs", b =>
+            modelBuilder.Entity("MyProject.Models.Model.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -385,27 +434,49 @@ namespace MyProject.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("CreateOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DayOfMonth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Revenue")
+                    b.Property<string>("Avatar")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdateOn")
+                    b.Property<DateTime>("CreateOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.ToTable("Product", (string)null);
+                });
 
-                    b.ToTable("KPI", (string)null);
+            modelBuilder.Entity("MyProject.Models.Model.ProductBill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BillId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BillId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductBill", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -497,15 +568,50 @@ namespace MyProject.Infrastructure.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("MyProject.Models.Model.KPIs", b =>
+            modelBuilder.Entity("MyProject.Models.Model.Bill", b =>
                 {
+                    b.HasOne("MyProject.Models.Model.Customers", "Customers")
+                        .WithMany("Bills")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("MyProject.Models.Model.Employees", "Employees")
-                        .WithMany("KPIs")
+                        .WithMany("Bills")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("MyProject.Models.Model.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customers");
+
                     b.Navigation("Employees");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MyProject.Models.Model.ProductBill", b =>
+                {
+                    b.HasOne("MyProject.Models.Model.Bill", "Bill")
+                        .WithMany("ProductBills")
+                        .HasForeignKey("BillId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyProject.Models.Model.Product", "Product")
+                        .WithMany("ProductBills")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Bill");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("MyProject.Models.Model.Admin", b =>
@@ -515,16 +621,28 @@ namespace MyProject.Infrastructure.Migrations
                     b.Navigation("AdminEmployees");
                 });
 
+            modelBuilder.Entity("MyProject.Models.Model.Bill", b =>
+                {
+                    b.Navigation("ProductBills");
+                });
+
             modelBuilder.Entity("MyProject.Models.Model.Customers", b =>
                 {
                     b.Navigation("AdminCustomers");
+
+                    b.Navigation("Bills");
                 });
 
             modelBuilder.Entity("MyProject.Models.Model.Employees", b =>
                 {
                     b.Navigation("AdminEmployees");
 
-                    b.Navigation("KPIs");
+                    b.Navigation("Bills");
+                });
+
+            modelBuilder.Entity("MyProject.Models.Model.Product", b =>
+                {
+                    b.Navigation("ProductBills");
                 });
 #pragma warning restore 612, 618
         }

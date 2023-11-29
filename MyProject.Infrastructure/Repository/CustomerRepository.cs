@@ -40,6 +40,16 @@ namespace MyProject.Infrastructure.Repository
             return true;
         }
 
+        public async Task<int> GetIdByNameAsync(string name)
+        {
+            var cus = await Context.Set<Customers>()
+                .Where(u => u.UserName == name)
+                .Select(u => u.Id)
+                .FirstOrDefaultAsync();
+            return cus;
+            
+        }
+
         public async Task<bool> EditCustomerAsync(Customers customer)
         {
             var customerCurrent = await Context.Set<Customers>()

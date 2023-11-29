@@ -1,9 +1,9 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@model List<MyProject.Models.Dtos.KPIsDto>
+﻿@using MyProject.Models.Model
+@using MyProject.Models.Dtos
+
 @{
     Layout = "_Layout";
+    var list = ViewBag.List as List<EmployeeDto>;
 }
 <table class="table table-hover">
     <thead>
@@ -14,27 +14,34 @@
         </tr>
     </thead>
     <tbody>
-    @if (Model != null)
+    @if (list != null)
     {
-        foreach (var user in Model)
+        foreach (var user in list)
         {
             
             <tr>
-                <td>@user.EMployeeName</td>
-                <td>@user.Kpis</td>
-                @if (@user.Kpis > 1000000)
-                {
-                    <td>Tốt</td>
-                }
-                else
-                {
-                    <td>Trung bình</td>
-                }
+                <td>@user.UserName</td>
                 
+                    @{
+                        var kpi = @user.Revenue / @user.DayOfMonth;
+                        <td>@kpi</td>
+                        if (kpi >= 333333)
+                        {
+                            <td>Tốt</td>
+                        }
+                        else if (100000 <= kpi && kpi < 333333)
+                        {
+                            <td>Khá</td>
+                        }
+                        else
+                        {
+                            <td>Trung bình</td>
+                        }
+                    }
+         
             </tr>
         }
     }
-    
     
     </tbody>
 </table>

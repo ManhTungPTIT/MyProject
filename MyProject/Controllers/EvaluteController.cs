@@ -8,15 +8,17 @@ namespace MyProject.Controllers
     [Authorize(Roles = "ADMIN")]
     public class EvaluteController : Controller
     {
-        private readonly IEvaluteService _service;
-        public EvaluteController(IEvaluteService _service)
+        
+        private readonly IEmployeeService _employeeService; 
+        public EvaluteController( IEmployeeService employeeService)
         {
-            this._service = _service;
+            _employeeService = employeeService;
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _service.GetAll();
-            return View(list);
+            var list = await _employeeService.GetAllEmployee();
+            ViewBag.List = list;
+            return View();
         }
     }
 }

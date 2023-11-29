@@ -3,24 +3,37 @@
     Layout = "_Layout";
 }
 <link rel="stylesheet" href="/css/AdminEmploy.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 <table class="table table-bordered mt-3">
     <thead>
     <tr>
         <th>ID</th>
         <th>UserName</th>
-        <th>Competence</th>
+        <th>Revenue</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-        @if (Model != null)
+    @if (Model != null)
+    {
+        foreach (var user in Model)
         {
-            foreach (var user in Model)
-            {
-                <tr>
+            <tr>
                 <td>@user.Id</td>
                 <td>@user.UserName</td>
-                <td>@user.Competence</td>
+                <td>@user.Revenue</td>
+                <td class="text-center">
+                    <button
+                        type="button"
+                        class="btn btn-primary detail"
+                        data-bs-toggle="modal"
+                        data-username = "@user.UserName"
+                        data-bs-target="#detail">
+                        ...
+                    </button>
+                    
+                </td>
                 <td>
                     <div class="d-flex flex-row justify-content-around">
 
@@ -39,33 +52,65 @@
                         <div class="modal fade" id="myModal/@user.Id">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                    
+
                                     <!-- Modal Header -->
                                     <div class="modal-header">
                                         <h4 class="modal-title">Edit Information Employee</h4>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
-                    
+
                                     <!-- Modal body -->
                                     <div class="modal-body">
                                         <input class="form-control" value="id" style="display: none"/>
                                         <input class="form-control shadow-none mt-2" value="Name"/>
                                         <input class="form-control shadow-none mt-2" value="Compre"/>
                                     </div>
-                    
+
                                     <!-- Modal footer -->
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                     </div>
-                    
+
                                 </div>
                             </div>
                         </div>
                     </form>
                 </td>
-                </tr>
-            }
+            </tr>
         }
-    
+        <!-- Modal -->
+        <div class="modal fade" id="detail" 
+             data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Các món hàng đã bán</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="detailProduct">
+                        <div class="InfoProduct d-flex align-items-start">
+                            <div class="me-4">
+                                <img
+                                    class="img-thumbnail rounded"
+                                    src=""
+                                    alt=""
+                                    style="width: 7rem; height: 7rem"/>
+                            </div>
+                            <div class="Info d-flex flex-column justify-content-around">
+                                <h5></h5>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
     </tbody>
 </table>
+
+<script src="/js/employee.js"></script>

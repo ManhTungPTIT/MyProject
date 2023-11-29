@@ -14,5 +14,6 @@ namespace MyProject.AppService.IService
         Task<bool> AddCustomer(Customers customer);
         Task<bool> EditCustomer(Customers customer);
         Task<bool> DeleteCustomer(int id);
+        Task<int> GetIdByName(string name);
     }
 }

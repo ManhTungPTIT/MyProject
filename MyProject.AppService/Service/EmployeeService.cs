@@ -1,6 +1,7 @@
 using MyProject.AppService.IService;
 using MyProject.DomainService;
 using MyProject.Models.Dtos;
+using MyProject.Models.Model;
 
 namespace MyProject.AppService.Service;
 
@@ -12,6 +13,8 @@ public class EmployeeService : IEmployeeService
     {
         _repository = repository;
     }
+    
+
     public async Task<List<EmployeeDto>> GetAllEmployee()
     {
         return await _repository.GetAllEmployeeAsync();
@@ -27,8 +30,23 @@ public class EmployeeService : IEmployeeService
         return await _repository.DeleteEmployeeAsync(id);
     }
 
-    public async Task<bool> UpdateCompetence(KPIsDto kpi)
+    public async Task<bool> UpdateKpiEmployee(Employees employees)
     {
-        return await _repository.UpdateCompetence(kpi);
+        return await _repository.UpdateKpiEmployeeAsync(employees);
+    }
+
+    public async Task<Employees> GetEmployeeByName(string name)
+    {
+        return await _repository.GetEmployeeByName(name);
+    }
+
+    public async Task<int> GetIdByName(string name)
+    {
+        return await _repository.GetIdByNameAsync(name);
+    }
+
+    public async Task<List<EmployeeDto>> GetEmployeeByProduct(int productId)
+    {
+        return await _repository.GetEmployeeByProduct(productId);
     }
 }

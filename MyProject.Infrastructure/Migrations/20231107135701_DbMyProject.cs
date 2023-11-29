@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyProject.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class MyProject : Migration
+    public partial class DbMyProject : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,13 +92,33 @@ namespace MyProject.Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Competence = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Revenue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DayOfMonth = table.Column<int>(type: "int", nullable: false),
+                    Kpis = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreateOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdateOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdateOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreateOn = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,24 +284,64 @@ namespace MyProject.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "KPI",
+                name: "Bill",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Revenue = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DayOfMonth = table.Column<int>(type: "int", nullable: false),
-                    CreateOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UpdateOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    TotalPPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CreateOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     EmployeeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KPI", x => x.Id);
+                    table.PrimaryKey("PK_Bill", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_KPI_Employees_EmployeeId",
+                        name: "FK_Bill_Customer_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Bill_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Bill_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductBill",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreateOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    BillId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductBill", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductBill_Bill_BillId",
+                        column: x => x.BillId,
+                        principalTable: "Bill",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ProductBill_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -346,9 +406,29 @@ namespace MyProject.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_KPI_EmployeeId",
-                table: "KPI",
+                name: "IX_Bill_CustomerId",
+                table: "Bill",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bill_EmployeeId",
+                table: "Bill",
                 column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bill_ProductId",
+                table: "Bill",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBill_BillId",
+                table: "ProductBill",
+                column: "BillId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductBill_ProductId",
+                table: "ProductBill",
+                column: "ProductId");
         }
 
         /// <inheritdoc />
@@ -376,10 +456,7 @@ namespace MyProject.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "KPI");
-
-            migrationBuilder.DropTable(
-                name: "Customer");
+                name: "ProductBill");
 
             migrationBuilder.DropTable(
                 name: "Admin");
@@ -391,7 +468,16 @@ namespace MyProject.Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Bill");
+
+            migrationBuilder.DropTable(
+                name: "Customer");
+
+            migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Product");
         }
     }
 }

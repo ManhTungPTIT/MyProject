@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MyProject.Infrastructure.Repository
 {
-    public class AuthenRepository : Reposotory<Admin>, IAuthenRepository
+    public class AuthenRepository : Reposotory<Admin> , IAuthenRepository
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -78,7 +78,9 @@ namespace MyProject.Infrastructure.Repository
                     UserName = admin.UserName,
                     Password = admin.Password,
                     CreateOn = admin.CreateOn,
-
+                    Revenue = 0,
+                    DayOfMonth = 0,
+                    Kpis = 0,
                 };
 
                 var employeeIdentity = new IdentityUser
@@ -99,7 +101,7 @@ namespace MyProject.Infrastructure.Repository
                 }
 
                 var result = await _userManager.AddToRoleAsync(employeeIdentity, "USER");
-                await _signInManager.SignInAsync(employeeIdentity, isPersistent: true);
+                
             }
           
             await Context.SaveChangesAsync();

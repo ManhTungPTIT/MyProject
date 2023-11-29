@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\css\\Home.css"
     },
     {
+      "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\css\\HomeEmployee.css",
+      "PackagePath": "staticwebassets\\css\\HomeEmployee.css"
+    },
+    {
       "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\css\\Login.css",
       "PackagePath": "staticwebassets\\css\\Login.css"
     },
@@ -33,8 +37,20 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\confirm_order.js",
+      "PackagePath": "staticwebassets\\js\\confirm_order.js"
+    },
+    {
+      "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\employee.js",
+      "PackagePath": "staticwebassets\\js\\employee.js"
+    },
+    {
       "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\update_cart.js",
+      "PackagePath": "staticwebassets\\js\\update_cart.js"
     },
     {
       "Id": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\lib\\bootstrap\\LICENSE",

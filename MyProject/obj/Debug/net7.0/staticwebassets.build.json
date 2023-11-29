@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "if/N0/mZCfu0mAeUdt2YJrpoVvGrMGDn/O98P7JAciU=",
+  "Hash": "+k9g2zmlpzIVlKzyUFEp0Svjc+CYAvNkVQsHeoQIhds=",
   "Source": "MyProject",
   "BasePath": "_content/MyProject",
   "Mode": "Default",
@@ -1122,6 +1122,23 @@
       "OriginalItemSpec": "wwwroot\\css\\Home.css"
     },
     {
+      "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\css\\HomeEmployee.css",
+      "SourceId": "MyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\",
+      "BasePath": "_content/MyProject",
+      "RelativePath": "css/HomeEmployee.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\HomeEmployee.css"
+    },
+    {
       "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\css\\Login.css",
       "SourceId": "MyProject",
       "SourceType": "Discovered",
@@ -1190,6 +1207,40 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\confirm_order.js",
+      "SourceId": "MyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\",
+      "BasePath": "_content/MyProject",
+      "RelativePath": "js/confirm_order.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\confirm_order.js"
+    },
+    {
+      "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\employee.js",
+      "SourceId": "MyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\",
+      "BasePath": "_content/MyProject",
+      "RelativePath": "js/employee.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\employee.js"
+    },
+    {
       "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\site.js",
       "SourceId": "MyProject",
       "SourceType": "Discovered",
@@ -1205,6 +1256,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\js\\update_cart.js",
+      "SourceId": "MyProject",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\",
+      "BasePath": "_content/MyProject",
+      "RelativePath": "js/update_cart.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\update_cart.js"
     },
     {
       "Identity": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",

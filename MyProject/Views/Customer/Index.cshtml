@@ -1,8 +1,10 @@
 ﻿@using MyProject.Models.Dtos
+@using MyProject.Models.Model
 @model MyProject.Models.Model.Customers
 @{
     Layout = "_Layout";
-    var list = ViewData["ListCustomer"] as List<CustomerDto>;
+    var list = ViewData["ListCustomer"] as List<Bill>;
+    var listCus = ViewBag.ListCus as List<CustomerDto>;
 }
 <link rel="stylesheet" href="/css/Home.css"/>
 <div class="tab-pane active">
@@ -56,6 +58,7 @@
     <thead>
     <tr>
         <th>ID</th>
+        <th>Employee</th>
         <th>UserName</th>
         <th>Phone</th>
         <th>Address</th>
@@ -63,23 +66,37 @@
     </tr>
     </thead>
     <tbody>
-    @if (list != null)
+    @if (list != null && listCus != null)
     {
-        @foreach (var cus in list)
+        @foreach (var customer in listCus)
         {
             <tr>
-                <td>@cus.Id</td>
-                <td>@cus.UserName</td>
-                <td>@cus.Phone</td>
-                <td>@cus.Address</td>
+                <td>@customer.Id</td>
+                <td>
+                    @foreach (var bill in list)
+                    {
+                        @if (@customer.Id == @bill.Customers.Id)
+                        {
+                            @bill.Employees.UserName
+                            break;
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                </td>
+                <td>@customer.UserName</td>
+                <td>@customer.Phone</td>
+                <td>@customer.Address</td>
                 <td>
                     <div class="d-flex flex-row align-items-center">
-                        <form style="width: 1rem" asp-action="Delete" asp-controller="Customer" asp-route-customerID="@cus.Id">
+                        <form style="width: 1rem" asp-action="Delete" asp-controller="Customer" asp-route-customerID="@customer.Id">
                             <button type="submit" class="btDelete">
                                 <i type="submit" class="fa-solid fa-trash" style="color: #db2424; cursor: pointer"></i>
                             </button>
                         </form>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal/@cus.Id" style="border: none; background-color: unset">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal/@customer.Id" style="border: none; background-color: unset">
                             <i class="fa-solid fa-file-pen ms-4" style="color: #db923d"></i>
                         </button>
                     </div>
@@ -87,8 +104,8 @@
             </tr>
 
             <!--  Edit -->
-            <form asp-action="Edit" asp-controller="Customer" >
-                <div class="modal" id="myModal/@cus.Id">
+            <form asp-action="Edit" asp-controller="Customer">
+                <div class="modal" id="myModal/@customer.Id">
                     <div class="modal-dialog">
                         <div class="modal-content">
 
@@ -100,11 +117,11 @@
 
                             <!-- Modal body -->
                             <div class="modal-body">
-                                <input class="Edit_info" type="text" value="@cus.UserName" asp-for="Id" style="display: none"/>
-                                <input class="Edit_info" type="text" value="@cus.UserName" asp-for="UserName"/>
-                                <input class="Edit_info" type="text" value="@cus.Phone" asp-for="Phone"/>
-                                <input class="Edit_info" type="text" value="@cus.Address" asp-for="Address"/>
-                                <input class="Edit_info" type="date" value="@cus.CreateOn" asp-for="CreateOn"/>
+                                <input class="Edit_info" type="text" value="@customer.UserName" asp-for="Id" style="display: none"/>
+                                <input class="Edit_info" type="text" value="@customer.UserName" asp-for="UserName"/>
+                                <input class="Edit_info" type="text" value="@customer.Phone" asp-for="Phone"/>
+                                <input class="Edit_info" type="text" value="@customer.Address" asp-for="Address"/>
+                                <input class="Edit_info" type="date" value="@customer.CreateOn" asp-for="CreateOn"/>
                             </div>
 
                             <!-- Modal footer -->

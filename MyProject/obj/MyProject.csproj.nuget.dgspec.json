@@ -31,6 +31,9 @@
               "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject.DomainService\\MyProject.DomainService.csproj": {
                 "projectPath": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject.DomainService\\MyProject.DomainService.csproj"
               },
+              "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject.Infrastructure\\MyProject.Infrastructure.csproj": {
+                "projectPath": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject.Infrastructure\\MyProject.Infrastructure.csproj"
+              },
               "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject.Models\\MyProject.Models.csproj": {
                 "projectPath": "D:\\C#\\C#_basic\\ProjectOfNam\\MyProject.Models\\MyProject.Models.csproj"
               }
@@ -66,6 +69,10 @@
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -173,6 +180,10 @@
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -284,6 +295,10 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.11, )"
@@ -386,6 +401,10 @@
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
@@ -503,6 +522,10 @@
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
               "version": "[7.0.10, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",

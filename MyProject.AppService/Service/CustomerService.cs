@@ -28,6 +28,11 @@ namespace MyProject.AppService.Service
             return await customerRepository.DeleteCustomerAsync(id);
         }
 
+        public async Task<int> GetIdByName(string name)
+        {
+            return await customerRepository.GetIdByNameAsync(name);
+        }
+
         public async Task<bool> EditCustomer(Customers customer)
         {
             return await customerRepository.EditCustomerAsync(customer);

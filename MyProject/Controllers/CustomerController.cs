@@ -11,15 +11,19 @@ namespace MyProject.Controllers
     public class CustomerController : Controller
     {
         private readonly ICustomerService _customerService;
+        private readonly IBillService _billService;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, IBillService billService)
         {
-            this._customerService = customerService;   
+            this._customerService = customerService;
+            _billService = billService;
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _customerService.GetAll();
-            ViewData["ListCustomer"] = list;
+            var listBill = await _billService.GetAll();
+            var listCus = await _customerService.GetAll();
+            ViewData["ListCustomer"] = listBill;
+            ViewBag.ListCus = listCus;
             
             return View();
         }
@@ -28,7 +32,14 @@ namespace MyProject.Controllers
         public async Task<IActionResult> AddCustomer(Customers customers)
         {
             await _customerService.AddCustomer(customers);
-            return View("Index");
+            var empId = await _customerService.GetIdByName(customers.UserName);
+            var data = new Bill
+            {
+                CustomerId = 1, 
+                EmployeeId = empId,
+            };
+            await _billService.CreateBill(data);
+            return RedirectToAction("Index");
         }
 
         

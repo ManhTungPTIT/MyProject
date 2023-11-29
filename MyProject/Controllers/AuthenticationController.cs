@@ -10,16 +10,16 @@ namespace MyProject.Controllers
     public class AuthenticationController : Controller
     {
         private readonly IAuthenService _service;
+
         public AuthenticationController(IAuthenService service)
         {
             this._service = service;
             
         }
-        
+
         public async Task<IActionResult> Login(string? userName, string? password)
         {
-            
-            if(userName != null && password != null)
+            if (userName != null && password != null)
             {
                 Admin admin = new Admin()
                 {
@@ -28,50 +28,47 @@ namespace MyProject.Controllers
                 };
 
                 var result = await _service.Login(admin);
-                if (!result.IsNullOrEmpty())
-                {
-                    
-                    if (User.Identity != null && User.Identity.IsAuthenticated)
-                    {
-                        var role = User.IsInRole("ADMIN");
-                        return Redirect("/Customer/Index");
-                    }
-                }
+
                 if (string.IsNullOrEmpty(result))
                 {
                     var message = "Tài khoản hoặc mật khẩu không đúng";
-                    return RedirectToAction("Register", routeValues: new {message});
+                    return RedirectToAction("Register", routeValues: new { message });
                 }
-                else
+                if(userName.Contains("@admin"))
                 {
                     return Redirect("/Customer/Index");
                 }
-                
+                else
+                {
+                    return Redirect("/Home/Index");
+                }
             }
+
             return View();
         }
+
         public async Task<IActionResult> Register(string? userName, string? password, string? phone, DateTime day)
         {
-            if(userName != null && password != null && phone != null ) {
-                Admin admin = new Admin()
-                {
-                    UserName = userName,
-                    Password = password,
-                    Phone = phone,
-                    CreateOn = day,
-                };
-                
-                bool check =  await _service.Register(admin);
-                if (!check)
-                {
-                    string message = "Tài khoản đã tồn tại";
-                    return RedirectToAction("Register", routeValues: new {message});
-                }
+            if (userName != null && password != null && phone != null)
+            {
+                    Admin admin = new Admin()
+                    {
+                        UserName = userName,
+                        Password = password,
+                        Phone = phone,
+                        CreateOn = day,
+                    };
 
-               
-                
-                return Redirect("~/Customer/Index");
+                    var check = await _service.Register(admin);
+                    if (!check)
+                    {
+                        string message = "Tài khoản đã tồn tại";
+                        return RedirectToAction("Register", routeValues: new { message });
+                    }
+                    return Redirect("~/Customer/Index");
             }
+
+
             return View();
         }
 

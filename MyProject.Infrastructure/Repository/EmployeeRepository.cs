@@ -20,7 +20,8 @@ public class EmployeeRepository : Reposotory<Employees>, IEmployeeRepository
             {
                 Id = e.Id,
                 UserName = e.UserName,
-                Competence = e.Competence,
+                DayOfMonth = e.DayOfMonth,
+                Revenue = e.Revenue,
             }).ToListAsync();
         return list;
     }
@@ -32,7 +33,6 @@ public class EmployeeRepository : Reposotory<Employees>, IEmployeeRepository
             .FirstOrDefaultAsync();
 
         employee.UserName = employeeDto.UserName;
-        employee.Competence = employeeDto.Competence;
         employee.UpdateOn = DateTime.Now;
 
         await Context.SaveChangesAsync();
@@ -48,22 +48,62 @@ public class EmployeeRepository : Reposotory<Employees>, IEmployeeRepository
         return true;
     }
 
-    public async Task<bool> UpdateCompetence(KPIsDto kpi)
+    public async Task<bool> UpdateKpiEmployeeAsync(Employees employees)
     {
-        var user = await Context.Set<Employees>().FirstOrDefaultAsync(u => u.Id == kpi.EmployeeId);
+        var data = await Context.Set<Employees>()
+            .Where(p => p.UserName == employees.UserName)
+            .FirstOrDefaultAsync();
 
-        if (kpi.Kpis > 1000000)
+        if (data != null)
         {
-            user.Competence = "Good";
-        }
-        else
-        {
-            user.Competence = "Fail";
+            data.Revenue += employees.Revenue;
+            data.UpdateOn = DateTime.Now;
+            data.DayOfMonth += 1;
+            data.Kpis = data.Revenue / data.DayOfMonth;
+
+            Context.Update(data);
+            await Context.SaveChangesAsync();
+            return true;
         }
 
-        await Context.SaveChangesAsync();
-        return true;
+        return false;
     }
 
-   
+    public async Task<Employees> GetEmployeeByName(string name)
+    {
+        var employee = await Context.Set<Employees>()
+            .FirstOrDefaultAsync(p => p.UserName == name);
+        return employee;
+    }
+
+    public async Task<int> GetIdByNameAsync(string name)
+    {
+        var id = await Context.Set<Employees>()
+            .Where(e => e.UserName == name)
+            .Select(e => e.Id)
+            .FirstOrDefaultAsync();
+
+        return id;
+    }
+
+    public async Task<List<EmployeeDto>> GetEmployeeByProduct(int productId)
+    {
+        var list = await Context.Set<Employees>()
+            .Where(em => em.Bills.Any(pc => pc.ProductId == productId))
+            .Select(em => new EmployeeDto()
+            {
+                Id = em.Id,
+                UserName = em.UserName,
+                Revenue = em.Revenue,
+                ProductDtos = em.Bills.Select(pc => new ProductDto
+                {
+                    ProductName = pc.Product.ProductName,
+                    Price = pc.Product.Price,
+                    Avatar = pc.Product.Avatar,
+                }).ToList()
+            }).ToListAsync();
+
+        return list;
+    }
+    
 }

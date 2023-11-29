@@ -1,0 +1,56 @@
+@model List<MyProject.Models.Model.Bill>
+
+
+    <div class="Table">
+        <div class="Table-main" id="List_order">
+            @if (Model != null)
+            {
+                @foreach (var product in Model)
+                {
+                    <div class="Table-main_item">
+                        <div class="Table-main_item-img">
+                            <img
+                                src="@product.Product.Avatar"
+                                alt="Anh"/>
+                        </div>
+
+                        <div class="Table-main_item-info">
+                            <p class="infor-name">@product.Product.ProductName</p>
+                            <div class="d-flex flex-row ">
+                                <p style="margin-bottom: 0">Số lượng: </p>
+                                <input type="number" id="quantity" class="info_quantity" value="@product.Quantity" readonly/>
+                            </div>
+                            <div>
+                                <p style="margin-bottom: 0">Giá tiền: </p>
+                                <input type="number" id="totalPrice" class="info_price" value="@product.Product.Price" readonly/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Chưa có đơn nào</p>
+            }
+        </div>
+        <div class="Table-footer">
+            <div class="footer-item">
+                <label>Tên khách hàng</label>
+                <input id="name_customer" class="shadow-none"/>
+            </div>
+            <div class="footer-item">
+                <label>Tên nhân viên </label>
+                <p id="name-employee">@User.Identity?.Name</p>
+            </div>
+            <div class="footer-item">
+                <label>Hóa đơn</label>
+                <p id="total"></p>
+            </div>
+            <div class="Confirm">
+                <button id="confirm">Thanh toán</button>
+            </div>
+        </div>
+    </div>
+
+

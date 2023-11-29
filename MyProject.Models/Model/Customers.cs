@@ -17,5 +17,6 @@ namespace MyProject.Models.Model
         public string Address { get; set; }
 
         public IList<AdminCustomers> AdminCustomers { get; set; } 
+        public ICollection<Bill> Bills { get; set; }
     }
 }

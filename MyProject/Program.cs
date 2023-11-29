@@ -25,6 +25,13 @@ namespace MyProject
                 .AddEntityFrameworkStores<ApplicationDBContext>()
                 .AddDefaultTokenProviders();
 
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromHours(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            
             builder.Services.AddRazorPages(options =>
             {
                 options.Conventions.AuthorizePage("/Contact");
@@ -99,6 +106,7 @@ namespace MyProject
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

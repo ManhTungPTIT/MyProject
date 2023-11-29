@@ -17,3 +17,5 @@ D:\C#\C#_basic\ProjectOfNam\MyProject.AppService\bin\Debug\net7.0\MyProject.Mode
 D:\C#\C#_basic\ProjectOfNam\MyProject.AppService\bin\Debug\net7.0\MyProject.DomainService.pdb
 D:\C#\C#_basic\ProjectOfNam\MyProject.AppService\bin\Debug\net7.0\MyProject.Models.pdb
 D:\C#\C#_basic\ProjectOfNam\MyProject.AppService\obj\Debug\net7.0\MyProject.AppService.csproj.CopyComplete
+D:\C#\C#_basic\ProjectOfNam\MyProject.AppService\bin\Debug\net7.0\MyProject.Infrastructure.dll
+D:\C#\C#_basic\ProjectOfNam\MyProject.AppService\bin\Debug\net7.0\MyProject.Infrastructure.pdb

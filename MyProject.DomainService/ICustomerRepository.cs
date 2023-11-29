@@ -14,5 +14,6 @@ namespace MyProject.DomainService
         Task<bool> AddCustomerAsync(Customers customer);
         Task<bool> EditCustomerAsync(Customers customer);
         Task<bool> DeleteCustomerAsync(int id);
+        Task<int> GetIdByNameAsync(string name);
     }
 }
